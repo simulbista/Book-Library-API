@@ -30,9 +30,9 @@ public class BookService {
 		bookRepository.save(book);
 	}
 
-	// update a book
-	public void updateBook(Book book) throws Exception {
-		boolean isExist = bookRepository.findAll().stream().anyMatch(b -> b.getName().equals(book.getName()));
+	// update a book by id
+	public void updateBookById(Book book) throws Exception {
+		boolean isExist = bookRepository.findAll().stream().anyMatch(b -> b.getId() == book.getId());
 		if (!isExist)
 			throw new Exception("The book titled " + book.getName() + " doesn't exist in the database.");
 		bookRepository.save(book);
@@ -43,6 +43,7 @@ public class BookService {
 		boolean isExist = bookRepository.findAll().stream().anyMatch(b -> b.getId() == id);
 		if (!isExist)
 			throw new Exception("The book with id " + id + " doesn't exist in the database.");
+		bookRepository.deleteById(id);
 	}
 
 	// get all books

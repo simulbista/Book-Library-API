@@ -1,5 +1,4 @@
 package com.humber.eap.model;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,4 +19,5 @@ public class Book {
 	private double price;
 	private String genre;
 	private String author;
+
 }

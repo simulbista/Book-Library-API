@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	//api endpoint: http://localhost:8080/api/book/
+	//api endpoint: http://localhost:8080/api/book/1
 	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_XML_VALUE)
 	public Book getBookById(@PathVariable int id) throws Exception {
 		Optional <Book> book = bookService.getBookById(id);
@@ -34,7 +35,7 @@ public class BookController {
 	}
 	
 	//api endpoint: http://localhost:8080/api/book/add
-	@GetMapping(value="/add",consumes = MediaType.APPLICATION_XML_VALUE)
+	@PostMapping(value="/add",consumes = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> addBook(@RequestBody Book book) throws Exception {
 		try{
 			bookService.addBook(book);
@@ -48,7 +49,7 @@ public class BookController {
 	@PutMapping(value="/update",consumes=MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> updateBook(@RequestBody Book book) throws Exception{
 		try {
-			bookService.updateBook(book);
+			bookService.updateBookById(book);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -72,14 +73,14 @@ public class BookController {
 		return bookService.getAllBooks();
 	}
 	
-	//api endpoint: http://localhost:8080/api/book?author={author}
-	@GetMapping(value="/", produces = MediaType.APPLICATION_XML_VALUE)
+	//api endpoint: http://localhost:8080/api/book/author?author={author}
+	@GetMapping(value="/author", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<Book> getBooksByAuthor(@RequestParam("author") String author){
 		return bookService.getBooksByAuthor(author);
 	}
 	
-	//api endpoint: http://localhost:8080/api/book?genre={genre}
-	@GetMapping(value="/", produces = MediaType.APPLICATION_XML_VALUE)
+	//api endpoint: http://localhost:8080/api/book/genre?genre={genre}
+	@GetMapping(value="/genre", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<Book> getBooksByGenre(@RequestParam("genre") String genre){
 		return bookService.getBooksByGenre(genre);
 	}
