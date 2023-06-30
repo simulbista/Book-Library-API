@@ -1,6 +1,7 @@
 package com.humber.eap.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class BookController {
 	private BookService bookService;
 
 	//api endpoint: http://localhost:8080/api/book/
+	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_XML_VALUE)
+	public Book getBookById(@PathVariable int id) throws Exception {
+		Optional <Book> book = bookService.getBookById(id);
+		return  book.orElse(null);
+	}
 	
 	//api endpoint: http://localhost:8080/api/book/add
 	@GetMapping(value="/add",consumes = MediaType.APPLICATION_XML_VALUE)
