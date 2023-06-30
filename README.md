@@ -1,6 +1,8 @@
 # Book-Library-API
 XML REST API Spring Boot Application that provides different API endpoints to manage books in a H2 database
 
+Technologies used:
+
 [x]XML
 [x]REST API
 [x]Spring Boot
@@ -10,6 +12,8 @@ XML REST API Spring Boot Application that provides different API endpoints to ma
 [x] H2 in-memory db
 
 API endpoints:
+
+//get a book by id: http://localhost:8080/api/book/1
 //add a book: http://localhost:8080/api/book/add
 //update a book: http://localhost:8080/api/book/update
 //delete book by id: http://localhost:8080/api/book/delete/1
