@@ -10,6 +10,7 @@ Technologies used:
 [x]Tomcat
 [x]Lombok
 [x] H2 in-memory db
+[x] jackson and jaxb for xml binding
 
 API endpoints:
 
