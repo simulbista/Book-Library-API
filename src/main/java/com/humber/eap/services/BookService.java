@@ -34,7 +34,7 @@ public class BookService {
 	public void updateBookById(Book book) throws Exception {
 		boolean isExist = bookRepository.findAll().stream().anyMatch(b -> b.getId() == book.getId());
 		if (!isExist)
-			throw new Exception("The book titled " + book.getName() + " doesn't exist in the database.");
+			throw new Exception("The book with id " + book.getId() + " doesn't exist in the database.");
 		bookRepository.save(book);
 	}
 

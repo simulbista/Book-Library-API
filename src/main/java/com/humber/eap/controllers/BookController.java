@@ -27,14 +27,14 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	//api endpoint: http://localhost:8080/api/book/1
+	//get book by id API end point: http://localhost:8080/api/book/1
 	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_XML_VALUE)
 	public Book getBookById(@PathVariable int id) throws Exception {
 		Optional <Book> book = bookService.getBookById(id);
 		return  book.orElse(null);
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/add
+	//add a book API end point: http://localhost:8080/api/book/add
 	@PostMapping(value="/add",consumes = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> addBook(@RequestBody Book book) throws Exception {
 		try{
@@ -45,7 +45,7 @@ public class BookController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("The book titled ".concat(book.getName()).concat(" has been successfully added!"));
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/update
+	//update book API end point: http://localhost:8080/api/book/update
 	@PutMapping(value="/update",consumes=MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> updateBook(@RequestBody Book book) throws Exception{
 		try {
@@ -56,7 +56,7 @@ public class BookController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("The book titled ".concat(book.getName()).concat(" has been successfully updated!"));
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/delete/1
+	//remove book by id API end point: http://localhost:8080/api/book/delete/1
 	@DeleteMapping(value="/delete/{id}")
 	public ResponseEntity<String> deleteBookById(@PathVariable int id) throws Exception{
 		try {
@@ -67,19 +67,19 @@ public class BookController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("The book with id " + id + " has been successfully deleted!");
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/all
+	//get all books API end point: http://localhost:8080/api/book/all
 	@GetMapping(value="/all", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<Book> getAllBooks(){
 		return bookService.getAllBooks();
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/author?author={author}
+	//find books by author API end point: http://localhost:8080/api/book/author?author={author}
 	@GetMapping(value="/author", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<Book> getBooksByAuthor(@RequestParam("author") String author){
 		return bookService.getBooksByAuthor(author);
 	}
 	
-	//api endpoint: http://localhost:8080/api/book/genre?genre={genre}
+	//find books by genre API end point: http://localhost:8080/api/book/genre?genre={genre}
 	@GetMapping(value="/genre", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<Book> getBooksByGenre(@RequestParam("genre") String genre){
 		return bookService.getBooksByGenre(genre);
